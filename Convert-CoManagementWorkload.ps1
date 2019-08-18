@@ -13,7 +13,8 @@
         'Endpoint Protection',
         'Office Click-To-Run apps',
         'Resource access policies',
-        'Windows Updates policies'
+        'Windows Updates policies',
+        'CLient Apps'
 .PARAMETER Workload
     Translate an integer workload to the named workload values using bitwise or operator.
 .EXAMPLE
@@ -47,7 +48,8 @@ param(
         'Endpoint Protection',
         'Office Click-To-Run apps',
         'Resource access policies',
-        'Windows Updates policies'
+        'Windows Updates policies',
+        'CLient Apps'
     )]
     [string[]]
     $DesiredWorkload,
@@ -64,8 +66,9 @@ switch ($PSCmdlet.ParameterSetName) {
             "Resource access policies" = 5;
             "Windows Updates Policies" = 17;
             "Endpoint Protection"      = 33;
-            "Device Configuration"     = 45;
+            "Device Configuration"     = 9;
             "Office Click-to-Run apps" = 129;
+            "Client aps"              = 65;
         }
         # Creating an arraylist and adding all the integer values for our workloads to the arraylist.
         $ToCalc = [System.Collections.ArrayList]::new()
@@ -84,11 +87,13 @@ switch ($PSCmdlet.ParameterSetName) {
     'TranslateWorkload' {
         $Workloads = @{
             3   = "Compliance policies";
-            5   = "Resource access policies"
+            5   = "Resource access policies";
             17  = "Windows Updates Policies";
-            33  = "Endpoint Protection"
-            45  = "Device Configuration"
-            129 = "Office Click-to-Run apps"
+            33  = "Endpoint Protection";
+            9  = "Device Configuration";
+            129 = "Office Click-to-Run apps";
+            65 = "Client apps";
+            
         }
 
         # If our workload input is greater than 1, we perform a -band comparison against all possible workloads and return the matches
